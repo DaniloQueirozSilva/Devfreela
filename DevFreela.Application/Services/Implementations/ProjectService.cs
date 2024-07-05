@@ -27,38 +27,70 @@ namespace DevFreela.Application.Services.Implementations
 
         public void CreateComment(CreateCommentInputModel inputModel)
         {
-            var comment = new ProjectComment()
-            throw new NotImplementedException();
+            
+            var comment = new ProjectComment(inputModel.Content, inputModel.IdUser,inputModel.IdProject);
+            _dbContext.ProjectComments.Add(comment);
+             
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var project = _dbContext.Projects.SingleOrDefault(p => p.Id == id);
+
+            project.Cancel();
+            
         }
 
         public void Finish(int id)
         {
-            throw new NotImplementedException();
+            var project = _dbContext.Projects.SingleOrDefault(p => p.Id == id);
+            project.Finish();
+            
         }
 
         public List<ProjectViewModel> GellAll(string query)
         {
-            throw new NotImplementedException();
+            var projects = _dbContext.Projects;
+
+            var projectsViewModel = projects
+                .Select(p => new ProjectViewModel(p.Id,p.Title, p.CreatedAt))
+                .ToList();
+
+
+            return projectsViewModel;
         }
 
         public ProjectDetailsViewModel GetById(int id)
         {
-            throw new NotImplementedException();
+            var project = _dbContext.Projects.SingleOrDefault(p => p.Id == id);
+
+            var projectDetailsViewModel = new ProjectDetailsViewModel(
+                project.Id,
+                project.Title,
+                project.Description,
+                project.TotalCost,
+                project.StartedAt,
+                project.FinishedAt
+                );
+
+            return projectDetailsViewModel;
         }
 
         public void Start(int id)
         {
-            throw new NotImplementedException();
+
+            var project = _dbContext.Projects.SingleOrDefault(p => p.Id == id);
+            project.Start();
+
+            //_dbContext.Projects.
+            
         }
 
         public void Update(UpdateProjectInputModel inputModel)
         {
-            throw new NotImplementedException();
+            var project = _dbContext.Projects.SingleOrDefault(p => p.Id == inputModel.Id);
+
+            project.Update(inputModel.Title, inputModel.Description, inputModel.TotalCost);
         }
     }
 }
