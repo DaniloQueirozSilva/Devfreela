@@ -2,9 +2,9 @@
 
 namespace DevFreela.Core.Entities
 {
-    public class Project : BaseEntity
+    public class UserSkill : BaseEntity
     {
-        public Project(string title, string description, int idClient, int idFreelancer, decimal totalCost)
+        public UserSkill(string title, string description, int idClient, int idFreelancer, decimal totalCost)
         {
             Title = title;
             Description = description;
@@ -14,7 +14,7 @@ namespace DevFreela.Core.Entities
 
             CreatedAt = DateTime.Now;
             Status = ProjectStatusEnum.Created;
-            Comments = new List<ProjectComment>();
+            Comments = new List<User>();
         }
 
         public string Title { get; private set; }
@@ -28,7 +28,7 @@ namespace DevFreela.Core.Entities
         public DateTime? StartedAt { get; private set; }
         public DateTime? FinishedAt { get; private set; }
         public ProjectStatusEnum Status { get; private set; }
-        public List<ProjectComment> Comments { get; set; }
+        public List<User> Comments { get; set; }
 
 
         public void Cancel()

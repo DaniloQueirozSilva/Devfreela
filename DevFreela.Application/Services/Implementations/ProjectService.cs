@@ -17,7 +17,7 @@ namespace DevFreela.Application.Services.Implementations
         {
 
             
-            var project = new Project(inputModel.Title,inputModel.Description,
+            var project = new UserSkill(inputModel.Title,inputModel.Description,
                 inputModel.IdClient, inputModel.IdFreelancer, inputModel.TotalCost);
             
             _dbContext.Projects.Add(project);
@@ -28,7 +28,7 @@ namespace DevFreela.Application.Services.Implementations
         public void CreateComment(CreateCommentInputModel inputModel)
         {
             
-            var comment = new ProjectComment(inputModel.Content, inputModel.IdUser,inputModel.IdProject);
+            var comment = new User(inputModel.Content, inputModel.IdUser,inputModel.IdProject);
             _dbContext.ProjectComments.Add(comment);
              
         }

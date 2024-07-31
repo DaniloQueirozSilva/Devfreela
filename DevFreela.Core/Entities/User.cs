@@ -16,8 +16,8 @@ namespace DevFreela.Core.Entities
 
             CreatedAt = DateTime.Now;
             Skills = new List<UserSkill>();
-            OwnedProjects = new List<Project>();
-            FreelanceProjects = new List<Project>();
+            OwnedProjects = new List<UserSkill>();
+            FreelanceProjects = new List<UserSkill>();
         }
 
         public string FullName { get; private set; }
@@ -26,8 +26,8 @@ namespace DevFreela.Core.Entities
         public DateTime CreatedAt { get; private set; }
         public bool Active { get; private set; }
         public List<UserSkill> Skills { get; private set; }
-        public List<Project> OwnedProjects { get; private set; }
-        public List<Project> FreelanceProjects { get; private set; }
-        public List<ProjectComment> Comments { get; set; }
+        public List<UserSkill> OwnedProjects { get; private set; }
+        public List<UserSkill> FreelanceProjects { get; private set; }
+        public List<User> Comments { get; set; }
     }
 }
