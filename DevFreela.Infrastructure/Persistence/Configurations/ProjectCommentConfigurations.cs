@@ -10,13 +10,14 @@ using System.Threading.Tasks;
 
 namespace DevFreela.Infrastructure.Persistence.Configurations
 {
-    public class ProjectCommentConfigurations : IEntityTypeConfiguration<User>
+    public class ProjectCommentConfigurations : IEntityTypeConfiguration<ProjectComment>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
-        {
+      
 
+        public void Configure(EntityTypeBuilder<ProjectComment> builder)
+        {
             builder
-            .HasKey(P => P.Id);
+        .HasKey(P => P.Id);
 
             builder
                 .HasOne(P => P.Project)

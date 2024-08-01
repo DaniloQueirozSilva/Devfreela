@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace DevFreela.Infrastructure.Persistence.Configurations
 {
-    public class ProjectConfigurations : IEntityTypeConfiguration<UserSkill>
+    public class ProjectConfigurations : IEntityTypeConfiguration<Project>
     {
-        public void Configure(EntityTypeBuilder<UserSkill> builder)
+        public void Configure(EntityTypeBuilder<Project> builder)
         {
            
             builder
