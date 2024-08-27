@@ -13,8 +13,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-
-builder.Services.AddDbContext<DevFreelaDbContext>(p => p.UseSqlServer(builder.Configuration["ConnectionStrings:DevFreelaDB"])) ;
+var cns = builder.Configuration.GetConnectionString("DevFreelaDB");
+builder.Services.AddDbContext<DevFreelaDbContext>(p => p.UseSqlServer(cns)) ;
 builder.Services.AddScoped<IProjectService, ProjectService>();
 
 
