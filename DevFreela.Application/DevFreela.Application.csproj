@@ -13,10 +13,10 @@
 
   <ItemGroup>
     <Folder Include="Queries\GetProjectById\" />
-    <Folder Include="Queries\GetUser\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="MediatR" Version="12.4.1" />
   </ItemGroup>
 
