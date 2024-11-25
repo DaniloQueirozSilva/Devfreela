@@ -1,11 +1,7 @@
 ﻿using DevFreela.Core.Entities;
 using DevFreela.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace DevFreela.Infrastructure.Persistence.Repositories
 {
@@ -16,9 +12,32 @@ namespace DevFreela.Infrastructure.Persistence.Repositories
         {
             _dbContext = dbContext;
         }
+
+        public async Task<int> AddAsync(User user)
+        {
+
+            await _dbContext.Users.AddAsync(user);
+            _dbContext.SaveChanges();
+
+            return user.Id;
+        }
+
         public async Task<User> GetByIdAsync(int id)
         {
-            return await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == id);
+            var result = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == id);
+            return result!;
+        }
+
+        public async Task<User> GetUserByEmailAndPasswordAsync(string email, string passwordHash)
+        {
+            var result = await _dbContext.Users.SingleOrDefaultAsync(x => x.Email == email && x.Password == passwordHash);
+
+            return result!;
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

@@ -36,10 +36,10 @@ namespace DevFreela.Infrastructure.Persistence.Repositories
             return await _dbContext.Projects.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async  Task AddAsync(Project project)
+        public async Task AddAsync(Project project)
         {
             await _dbContext.Projects.AddAsync(project);
-            await _dbContext.SaveChangesAsync();
+             _dbContext.SaveChanges();
         }
 
         public async Task DeleteAsync(int id)

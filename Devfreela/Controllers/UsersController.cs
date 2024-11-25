@@ -1,5 +1,6 @@
 ﻿using DevFreela.API.Models;
 using DevFreela.Application.Commands.CreateUser;
+using DevFreela.Application.Commands.LoginUser;
 using DevFreela.Application.InputModels;
 using DevFreela.Application.Queries.GetUser;
 using DevFreela.Application.Services.Interfaces;
@@ -25,6 +26,18 @@ namespace DevFreela.API.Controllers
             _mediator = mediator;
         }
 
+        // api/users/login
+        [HttpPut]
+        public async Task<IActionResult> Login([FromBody] LoginUserCommand login)
+        {
+            var loginUserViewModel = await _mediator.Send(login);
+
+            if (loginUserViewModel == null)
+                return BadRequest();
+
+            return Ok(loginUserViewModel);
+        }
+
         //api/users/1
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
@@ -43,17 +56,7 @@ namespace DevFreela.API.Controllers
         // api/users
         [HttpPost]
         public IActionResult Post([FromBody] CreateUserCommand inputModel)
-        {
-            if(!ModelState.IsValid)
-            {
-                var messages = ModelState
-                    .SelectMany(ms => ms.Value.Errors)
-                    .Select(e => e.ErrorMessage)
-                    .ToList();
-
-                return BadRequest(messages);
-
-            }
+        {       
 
             var id = _mediator.Send(inputModel);
 

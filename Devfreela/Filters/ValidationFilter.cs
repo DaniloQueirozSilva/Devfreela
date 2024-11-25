@@ -8,7 +8,7 @@ namespace DevFreela.API.Filters
     {
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            throw new NotImplementedException();
+            ;
         }
 
         public void OnActionExecuting(ActionExecutingContext context)
@@ -16,7 +16,7 @@ namespace DevFreela.API.Filters
             if (!context.ModelState.IsValid)
             {
                 var messages = context.ModelState
-                 .SelectMany(ms => ms.Value.Errors)
+                 .SelectMany(ms => ms.Value!.Errors)
                  .Select(e => e.ErrorMessage)
                  .ToList();
 
