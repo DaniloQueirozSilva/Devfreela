@@ -1,0 +1,18 @@
+﻿body {
+    background-color: black !important;
+    color: white !important;
+}
+
+.swagger-ui .topbar {
+    background-color: #1e1e1e !important;
+    color: white !important;
+}
+
+.swagger-ui .info {
+    color: white !important;
+}
+
+.swagger-ui .opblock-summary {
+    background-color: #333 !important;
+    color: white !important;
+}

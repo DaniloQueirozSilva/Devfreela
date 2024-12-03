@@ -26,7 +26,7 @@ namespace DevFreela.Application.Commands.LoginUser
             var user = await _userRepository.GetUserByEmailAndPasswordAsync(request.Email, passwordHash);
 
             if (user == null)
-                return null;
+                return null!;
 
             var token = _authService.GenerateJwtToken(user.Email, user.Role);           
 

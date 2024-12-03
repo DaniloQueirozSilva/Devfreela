@@ -6,6 +6,7 @@ using DevFreela.Application.Queries.GetUser;
 using DevFreela.Application.Services.Interfaces;
 using DevFreela.Core.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,25 +16,26 @@ using System.Threading.Tasks;
 namespace DevFreela.API.Controllers
 {
     [Route("api/users")]
+    [Authorize]
     public class UsersController : ControllerBase
     {
-       
 
         private readonly IMediator _mediator;
         public UsersController(IMediator mediator)
         {
-           
+
             _mediator = mediator;
         }
 
         // api/users/login
         [HttpPut]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginUserCommand login)
         {
             var loginUserViewModel = await _mediator.Send(login);
 
             if (loginUserViewModel == null)
-                return BadRequest();
+                return BadRequest("Usúario ou senha inválidos");
 
             return Ok(loginUserViewModel);
         }
@@ -50,26 +52,18 @@ namespace DevFreela.API.Controllers
                 return NotFound();
             }
 
-           return Ok(user);
+            return Ok(user);
         }
 
         // api/users
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Post([FromBody] CreateUserCommand inputModel)
-        {       
+        {
 
             var id = _mediator.Send(inputModel);
 
             return Created();
         }
-
-        //// api/users/1/login
-        //[HttpPut("{id}/login")]
-        //public IActionResult Login(int id, [FromBody] LoginModel login)
-        //{
-        //    // TODO: Para Módulo de Autenticação e Autorização
-
-        //    return NoContent();
-        //}
     }
 }
