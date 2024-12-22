@@ -1,0 +1,39 @@
+version: '3.9'
+
+networks:
+  devfreela-networks:
+    driver: bridge
+
+services:
+  database:
+    image: mcr.microsoft.com/mssql/server:latest
+    container_name: devfreela_database
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=741852963As@
+    volumes:
+      - devfreela-api-sqlserver:/var/opt/mssql
+    networks:
+      - devfreela-networks
+
+  api:
+    container_name: devfreela_api
+    build: 
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - "8080:8080"
+    environment:
+      - ConnectionStrings__DevFreelaDB=${ConnectionStrings__DevFreelaDB}
+      - Jwt__Key=${Jwt__Key}
+      - Jwt__Issuer=${Jwt__Issuer}
+      - Jwt__Audience=${Jwt__Audience}
+    depends_on: 
+      - database    
+    networks:
+      - devfreela-networks
+
+volumes:
+  devfreela-api-sqlserver:
