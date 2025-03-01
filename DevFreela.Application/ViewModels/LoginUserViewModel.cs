@@ -12,7 +12,7 @@ namespace DevFreela.Application.ViewModels
         {
             Email = email;
             Token = token;             
-        }
+        } 
 
         public string Email { get; set; }
         public string Token { get; set; }
