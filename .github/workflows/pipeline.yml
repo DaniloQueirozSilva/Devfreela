@@ -2,7 +2,8 @@ name: pipeline
 
 on:
   push:
-    - master
+     branches:
+      - main
      
 jobs:
   build:
