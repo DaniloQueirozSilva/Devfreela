@@ -31,7 +31,7 @@ namespace DevFreela.Test.Application.Queries
 
             Assert.NotNull(proectViewModelList);
             Assert.NotEmpty(proectViewModelList);
-            Assert.Equal(3, proectViewModelList.Count);
+            Assert.Equal(4, proectViewModelList.Count);
 
 
             projectRepository.Verify(pr => pr.GetAllAsync().Result, Times.Once);
