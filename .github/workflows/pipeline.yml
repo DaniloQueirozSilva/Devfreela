@@ -2,6 +2,7 @@ name: pipeline
 
 on:
   push:
+    - master
      
 jobs:
   build:
